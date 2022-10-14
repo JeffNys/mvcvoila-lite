@@ -20,7 +20,13 @@ abstract class AbstractController
     public function __construct()
     {
         $loader = new FilesystemLoader(APP_VIEW_PATH);
-        $this->twig = new Environment($loader);
+        if (APP_PROD] {
+            $this->twig = new Environment($loader);
+        } else {
+            $this->twig = new Environment($loader, [
+                "debug" => true,
+                ]);
+        }
         $this->twig->addExtension(new DebugExtension());
     }
 }
